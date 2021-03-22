@@ -3,7 +3,7 @@ const Post = require('../models/post_schema');
 
 const router = express.Router();
 
-router.use(express.json());
+router.use(express.json({ limit: '20mb' }));
 router.use(express.urlencoded({ extended: false }));
 
 
