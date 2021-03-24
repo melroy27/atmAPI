@@ -8,20 +8,28 @@ router.use(express.urlencoded({ extended: false }));
 
 
 router.post("/api/post", (req, res, next) => {
-    const post = new Post({
-        userId: req.body.userId,
-        postedOn: Date.now(),
-        questionId: 'ques02',
-        pillsData: req.body.pillsData,
-        title: req.body.title,
-        questionData: req.body.questionData,
-        answer: null
-    });
-    post.save();
-    console.log(post);
-    res.status(201).json({
-        message: 'Post Added Successfully'
-    });
+    try {
+        const post = new Post({
+            userId: req.body.userId,
+            postedOn: Date.now(),
+            questionId: 'ques02',
+            pillsData: req.body.pillsData,
+            title: req.body.title,
+            questionData: req.body.questionData,
+            answer: null
+        });
+        post.save();
+        console.log(post);
+        res.status(201).json({
+            message: 'Post Added Successfully'
+        });
+    } catch (e) {
+        res.status(400).json({
+            message: 'Post UnSuccessful'
+        });
+        console.log(e);
+    }
+
 });
 
 router.get('/api/posts', async (req, res, next) => {
