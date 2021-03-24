@@ -23,7 +23,6 @@ const postSchema = new mongoose.Schema({
     questionData:
     {
         type: Map,
-        of: String
     },
     answer: [
         {
