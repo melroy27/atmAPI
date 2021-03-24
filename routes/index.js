@@ -36,7 +36,7 @@ router.post("/api/post", (req, res, next) => {
 
 router.get('/api/posts', async (req, res, next) => {
     try {
-        const posts = await Post.find({})
+        const posts = await Post.find({}).sort({ 'postedOn': -1 })
         res.status(200).json({
             status: true,
             message: "Post Fetched Successfully",

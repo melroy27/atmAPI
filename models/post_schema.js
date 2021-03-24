@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
     },
     postedOn: {
         type: Date,
-        rdefault: Date.now
+        default: Date.now
     },
     pillsData: {
         type: Object,
