@@ -15,7 +15,7 @@ router.post("/api/post", (req, res, next) => {
         pillsData: req.body.pillsData,
         title: req.body.title,
         questionData: req.body.questionData,
-        answer: ''
+        answer: null
     });
     post.save();
     console.log(post);

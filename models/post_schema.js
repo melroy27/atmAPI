@@ -24,12 +24,11 @@ const postSchema = new mongoose.Schema({
     {
         type: Map,
     },
-    answer: [
-        {
-            type: Map,
-            of: mongoose.SchemaTypes.Mixed,
-        }
-    ]
+    answer:
+    {
+        type: Map,
+        default: null
+    }
 
 })
 module.exports = mongoose.model('posts', postSchema);
