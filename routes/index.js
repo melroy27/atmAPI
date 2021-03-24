@@ -21,10 +21,12 @@ router.post("/api/post", (req, res, next) => {
         post.save();
         console.log(post);
         res.status(201).json({
+            status: true,
             message: 'Post Added Successfully'
         });
     } catch (e) {
         res.status(400).json({
+            status: false,
             message: 'Post UnSuccessful'
         });
         console.log(e);
@@ -36,6 +38,7 @@ router.get('/api/posts', async (req, res, next) => {
     try {
         const posts = await Post.find({})
         res.status(200).json({
+            status: true,
             message: "Post Fetched Successfully",
             posts: posts
         });
