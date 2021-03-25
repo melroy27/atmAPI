@@ -37,7 +37,7 @@ router.get('/api/posts', async (req, res, next) => {
     //     searchOptions.name = new RegExp(req.query.question, i);
     // }
     try {
-        const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
+        const posts = await Post.find({}).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
             message: "Post Fetched Successfully",
