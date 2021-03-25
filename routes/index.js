@@ -7,18 +7,15 @@ router.use(express.json({ limit: '20mb' }));
 router.use(express.urlencoded({ extended: false }));
 
 
-router.post("/api/post", (req, res, next) => {
+router.post("/api/post", async (req, res, next) => {
+    const post = new Post({
+        userId: req.body.userId,
+        pillsData: req.body.pillsData,
+        title: req.body.title,
+        questionData: req.body.questionData
+    });
     try {
-        const post = new Post({
-            userId: req.body.userId,
-            postedOn: Date.now(),
-            questionId: 'ques02',
-            pillsData: req.body.pillsData,
-            title: req.body.title,
-            questionData: req.body.questionData,
-            answer: null
-        });
-        post.save();
+        await post.save();
         console.log(post);
         res.status(201).json({
             status: true,
@@ -35,12 +32,17 @@ router.post("/api/post", (req, res, next) => {
 });
 
 router.get('/api/posts', async (req, res, next) => {
+    let searchOptions = {}
+    if (req.query.question != null && req.query.question !== '') {
+        searchOptions.name = new RegExp(req.query.question, i);
+    }
     try {
-        const posts = await Post.find({}).sort({ 'postedOn': 'descending' })
+        const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
             message: "Post Fetched Successfully",
-            posts: posts
+            posts: posts,
+            searchOptions: req.query
         });
         console.log(posts);
     } catch (e) {

@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
         required: true,
     },
     questionId: {
-        type: String
+        type: mongoose.SchemaTypes.ObjectId
     },
     postedOn: {
         type: Date,
