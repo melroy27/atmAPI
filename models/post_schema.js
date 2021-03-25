@@ -5,9 +5,6 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    questionId: {
-        type: mongoose.SchemaTypes.ObjectId
-    },
     postedOn: {
         type: Date,
         default: Date.now
