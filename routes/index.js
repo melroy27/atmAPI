@@ -32,17 +32,17 @@ router.post("/api/post", async (req, res, next) => {
 });
 
 router.get('/api/posts', async (req, res, next) => {
-    let searchOptions = {}
-    if (req.query.question != null && req.query.question !== '') {
-        searchOptions.name = new RegExp(req.query.question, i);
-    }
+    // let searchOptions = {}
+    // if (req.query.question != null && req.query.question !== '') {
+    //     searchOptions.name = new RegExp(req.query.question, i);
+    // }
     try {
         const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
             message: "Post Fetched Successfully",
             posts: posts,
-            searchOptions: req.query
+            // searchOptions: req.query
         });
         console.log(posts);
     } catch (e) {
