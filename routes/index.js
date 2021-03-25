@@ -30,7 +30,15 @@ router.post("/api/post", async (req, res, next) => {
     }
 
 });
-
+router.get("/api/posts/:id", (req, res, next) => {
+    Post.findById(req.params.id).then(post => {
+        if (post) {
+            res.status(200).json(post);
+        } else {
+            res.status(404).json({ message: "Post not found!" });
+        }
+    });
+});
 router.get('/api/posts', async (req, res, next) => {
     // let searchOptions = {}
     // if (req.query.question != null && req.query.question !== '') {
