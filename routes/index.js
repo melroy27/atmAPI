@@ -49,6 +49,7 @@ router.get('/api/posts', async (req, res, next) => {
         searchOptions.name = new RegExp(req.query.search, i);
     }
     try {
+        console.log('search options: ',searchOptions);
         const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
