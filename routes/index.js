@@ -45,9 +45,9 @@ router.get("/api/posts/:id", (req, res, next) => {
 
 router.get('/api/posts', async (req, res, next) => {
     let searchOptions = {}
-    let query = req.query.search;
-    if (req.query.search != null && req.query.search !== '') {
-        searchOptions.search = new RegExp(req.query.search, i);
+    let query = req.query.title;
+    if (req.query.title != null && req.query.title !== '') {
+        searchOptions.title = new RegExp(req.query.title, i);
     }
     try {
         console.log('search options: ', searchOptions, query);
