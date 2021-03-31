@@ -54,7 +54,7 @@ router.get('/api/posts', async (req, res, next) => {
             status: true,
             message: "Post Fetched Successfully",
             posts: posts,
-            // searchOptions: req.query
+            searchOptions: req.query
         });
         console.log(posts);
     } catch (e) {
