@@ -44,12 +44,12 @@ router.get("/api/posts/:id", (req, res, next) => {
 });
 
 router.get('/api/posts', async (req, res, next) => {
-    // let searchOptions = {}
-    // if (req.query.question != null && req.query.question !== '') {
-    //     searchOptions.name = new RegExp(req.query.question, i);
-    // }
+    let searchOptions = {}
+    if (req.query.search != null && req.query.search !== '') {
+        searchOptions.name = new RegExp(req.query.search, i);
+    }
     try {
-        const posts = await Post.find({}).sort({ 'postedOn': 'descending' })
+        const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
             message: "Post Fetched Successfully",
