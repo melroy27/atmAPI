@@ -57,7 +57,6 @@ router.get('/api/posts', async (req, res, next) => {
             posts: posts,
             searchOptions: req.query
         });
-        console.log(posts);
     } catch (e) {
         console.log(e);
     }
