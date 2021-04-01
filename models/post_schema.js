@@ -25,6 +25,21 @@ const postSchema = new mongoose.Schema({
     {
         type: Map,
         default: null
+    },
+    rating: {
+        type: Object,
+        resolved: {
+            type: Number,
+            default: 0
+        },
+        partially: {
+            type: Number,
+            default: 0
+        },
+        notresolved: {
+            type: Number,
+            default: 0
+        }
     }
 
 })
