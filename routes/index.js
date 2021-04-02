@@ -49,13 +49,16 @@ router.get('/api/posts', async (req, res, next) => {
     // $and:[{pillsData: "technical"}
     // ,{pillsData: "AT"}]}
     let pillsData = req.query.pillsData;
+    let structure = { pillsData: pillsData };
 
     if (req.query.title != null && req.query.title !== '') {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
-
+    if (req.query.pillsData != null && req.query.pillsData !== '') {
+        searchOptions.pillsData = "$and:[structure]}"
+    }
     try {
-        console.log('search options: ', searchOptions, pillsData);
+        console.log('search options: ', searchOptions);
         const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
