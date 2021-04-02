@@ -45,13 +45,19 @@ router.get("/api/posts/:id", (req, res, next) => {
 
 router.get('/api/posts', async (req, res, next) => {
     let searchOptions = {}
-    let query = req.query.title;
-    let extra = req.query.pillsData;
+    // {title:"testing changes",
+    // $and:[{pillsData: "technical"}
+    // ,{pillsData: "AT"}]}
+    let pillsData = req.query.pillsData;
+
     if (req.query.title != null && req.query.title !== '') {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
+    // if (req.query.pillsData != null && req.query.pillsData !== '') {
+    //     searchOptions.pillsData = $and: []
+    // }
     try {
-        console.log('search options: ', searchOptions, query, extra);
+        console.log('search options: ', searchOptions, pillsData);
         const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
