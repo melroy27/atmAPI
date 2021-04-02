@@ -55,7 +55,7 @@ router.get('/api/posts', async (req, res, next) => {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
     if (req.query.pillsData != null && req.query.pillsData !== '') {
-        searchOptions.pillsData = "$and:[structure]}"
+        searchOptions.pillsData = {$and:[structure]}
     }
     try {
         console.log('search options: ', searchOptions);
