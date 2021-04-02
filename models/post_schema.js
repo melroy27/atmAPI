@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
         default: Date.now
     },
     pillsData: {
-        type: Object,
+        type: Array,
         required: true
     },
     title: {
