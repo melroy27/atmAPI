@@ -3,7 +3,7 @@ const Post = require('../models/post_schema');
 
 const router = express.Router();
 
-router.use(express.json({ limit: '20mb' }));
+router.use(express.json({ limit: '50mb' }));
 router.use(express.urlencoded({ extended: false }));
 
 
@@ -46,11 +46,12 @@ router.get("/api/posts/:id", (req, res, next) => {
 router.get('/api/posts', async (req, res, next) => {
     let searchOptions = {}
     let query = req.query.title;
+    let extra = req.query.pillsData;
     if (req.query.title != null && req.query.title !== '') {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
     try {
-        console.log('search options: ', searchOptions, query);
+        console.log('search options: ', searchOptions, query, extra);
         const posts = await Post.find(searchOptions).sort({ 'postedOn': 'descending' })
         res.status(200).json({
             status: true,
