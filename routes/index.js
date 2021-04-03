@@ -57,9 +57,13 @@ router.get('/api/posts', async (req, res, next) => {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
     if (req.query.pillsData != null && req.query.pillsData !== '') {
-        for (i = 0; i < req.query.pillsData.length; i++) {
-            console.log('Chips value: ', req.query.pillsData[i]);
-            // searchOptions.pillsData = `$and:[${"pillsData:"`${chips[i]}`}]`
+        if (chips.length == 1) {
+            searchOptions.pillsData = `$and:[${"pillsData:"`${chips[i]}`}]`
+        } else if (chips.length > 1) {
+            for (i = 0; i < req.query.pillsData.length; i++) {
+                console.log('Chips value: ', req.query.pillsData[i]);
+                searchOptions.pillsData = `$and:[${"pillsData:"`${chips[i]}`}]`
+            }
         }
     }
     try {
