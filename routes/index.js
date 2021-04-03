@@ -45,13 +45,22 @@ router.get("/api/posts/:id", (req, res, next) => {
 
 router.get('/api/posts', async (req, res, next) => {
     let searchOptions = {}
+
     // {title:"testing changes",
     // $and:[{pillsData: "technical"}
     // ,{pillsData: "AT"}]}
-    let pillsData = req.query.pillsData;
+
+    let chips = req.query.pillsData;
 
     if (req.query.title != null && req.query.title !== '') {
         searchOptions.title = new RegExp(req.query.title, 'i');
+    }
+    if (req.query.pillsData != null && req.query.pillsData !== '') {
+        for (i = 0; i < chips.length; i++) {
+            tempObj = { pillsData: `'${chips[i]}'` }
+            searchOptions.pillsData = `$and:[${tempObj}]`
+            console.log(tempObj);
+        }
     }
     try {
         console.log('search options: ', searchOptions);
