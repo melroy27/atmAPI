@@ -50,6 +50,7 @@ router.get('/api/posts', async (req, res, next) => {
     // $and:[{pillsData: "technical"}
     // ,{pillsData: "AT"}]}
 
+    // `$and:[${{ pillsData: chips[i] }}]`
     let chips = req.query.pillsData;
 
     if (req.query.title != null && req.query.title !== '') {
@@ -57,7 +58,7 @@ router.get('/api/posts', async (req, res, next) => {
     }
     if (req.query.pillsData != null && req.query.pillsData !== '') {
         for (i = 0; i < chips.length; i++) {
-            searchOptions.pillsData = `$and:[${{ pillsData: chips[i] }}]`
+            searchOptions.pillsData;
         }
     }
     try {
