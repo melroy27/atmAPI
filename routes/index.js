@@ -57,7 +57,7 @@ router.get('/api/posts', async (req, res, next) => {
     }
     if (req.query.pillsData != null && req.query.pillsData !== '') {
         for (i = 0; i < chips.length; i++) {
-            searchOptions.pillsData = `$and:[${{ pillsData: `'${chips[i]}'` }}]`
+            searchOptions.pillsData = `$and:[${{ pillsData: chips[i] }}]`
         }
     }
     try {
