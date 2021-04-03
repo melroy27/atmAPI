@@ -52,14 +52,14 @@ router.get('/api/posts', async (req, res, next) => {
 
     // `$and:[${{ pillsData: chips[i] }}]`
     let chips = req.query.pillsData;
-
+    console.log(chips);
     if (req.query.title != null && req.query.title !== '') {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
     if (req.query.pillsData != null && req.query.pillsData !== '') {
-        for (i = 0; i < chips.length; i++) {
-            console.log('Chips value: ', chips[i]);
-            searchOptions.pillsData = `$and:[${"pillsData:"`${chips[i]}`}]`
+        for (i = 0; i < req.query.pillsData.length; i++) {
+            console.log('Chips value: ', req.query.pillsData[i]);
+            // searchOptions.pillsData = `$and:[${"pillsData:"`${chips[i]}`}]`
         }
     }
     try {
