@@ -46,23 +46,26 @@ router.get("/api/posts/:id", (req, res, next) => {
 router.get('/api/posts', async (req, res, next) => {
     let searchOptions = {}
 
-    // {title:"testing changes",
-    // $and:[{pillsData: "technical"}
-    // ,{pillsData: "AT"}]}
+    // {title:"testing changes", $and:[{pillsData: "technical"} ,{pillsData: "AT"}]}
 
-    // `$and:[${{ pillsData: chips[i] }}]`
-    let chips = req.query.pillsData;
-    console.log(chips);
+
     if (req.query.title != null && req.query.title !== '') {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
     if (req.query.pillsData != null && req.query.pillsData !== '') {
-        if (chips.length == 1) {
-            searchOptions.pillsData = `$and:[${"pillsData:"`${chips[i]}`}]`
-        } else if (chips.length > 1) {
-            for (i = 0; i < req.query.pillsData.length; i++) {
-                console.log('Chips value: ', req.query.pillsData[i]);
-                searchOptions.pillsData = `$and:[${"pillsData:"`${chips[i]}`}]`
+        console.log(typeof req.query.pillsData);
+        if (typeof req.query.pillsData == 'string') {
+            searchOptions.$and = [{ pillsData: req.query.pillsData }]
+        }
+        else {
+            let tempArr = [];
+            let tempObj = {}
+            let chips = req.query.pillsData;
+            for (let i = 0; i < chips.length; i++) {
+                console.log('Object: ', chips[i]);
+                tempObj = { pillsData: chips[i] }
+                tempArr.push(tempObj);
+                searchOptions.$and = tempArr
             }
         }
     }
