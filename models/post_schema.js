@@ -24,10 +24,11 @@ const postSchema = new mongoose.Schema({
     answer:
         [{
             type: Map,
-            default: null
+            default: ''
         }],
     answeredBy: {
-        type: Array
+        type: Array,
+        default: ''
     },
     rating: {
         resolved: {
