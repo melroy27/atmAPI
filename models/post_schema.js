@@ -22,10 +22,10 @@ const postSchema = new mongoose.Schema({
         type: Map,
     },
     answer:
-    {
-        type: Map,
-        default: null
-    },
+        [{
+            type: Map,
+            default: null
+        }],
     answeredBy: {
         type: Array
     },
