@@ -26,6 +26,9 @@ const postSchema = new mongoose.Schema({
         type: Map,
         default: null
     },
+    answeredBy: {
+        type: Array
+    },
     rating: {
         resolved: {
             type: Number,

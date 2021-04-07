@@ -46,9 +46,6 @@ router.get("/api/posts/:id", (req, res, next) => {
 router.get('/api/posts', async (req, res, next) => {
     let searchOptions = {}
 
-    // {title:"testing changes", $and:[{pillsData: "technical"} ,{pillsData: "AT"}]}
-
-
     if (req.query.title != null && req.query.title !== '') {
         searchOptions.title = new RegExp(req.query.title, 'i');
     }
